@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ModernStream - Live & VOD</title>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https://placehold.co;
+    connect-src 'self' ws: wss:;
+    font-src 'self' https://fonts.gstatic.com;
+  " />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header id="main-header">
+    <div class="logo">ModernStream</div>
+    <nav class="nav-links">
+      <a href="#" class="active">홈</a>
+      <a href="#">시리즈</a>
+      <a href="#">영화</a>
+      <a href="#">New & 인기</a>
+      <a href="#">내 리스트</a>
+    </nav>
+    <div class="header-actions">
+      <button id="search-trigger" class="icon-btn search-trigger" aria-label="검색">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <div class="avatar">
+        <img src="https://placehold.co/32x32" alt="User">
+      </div>
+    </div>
+  </header>
+
+  <!-- 검색 오버레이 -->
+  <div id="search-overlay" class="search-overlay" aria-hidden="true">
+    <div class="search-container">
+      <div class="search-input-area">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="search-input" class="search-input" placeholder="무엇을 찾으시나요?" autocomplete="off">
+        <button id="close-search-btn" class="search-close-btn" aria-label="검색 닫기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      
+      <div class="search-tabs">
+        <button id="tab-suggestions" class="tab-btn active">추천 검색어</button>
+        <button id="tab-history" class="tab-btn">최근 검색</button>
+        <div class="tab-actions">
+          <button id="clear-history-btn" class="clear-history-btn">기록 전체 삭제</button>
+        </div>
+      </div>
+      
+      <div id="search-content" class="search-content-area">
+        <!-- 동적 콘텐츠 로드 영역 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <main>
+    <!-- 히어로 섹션 -->
+    <section class="hero" id="hero-section">
+      <img src="https://placehold.co/1920x1080/e50914/ffffff?text=Hero+Image" alt="Hero" class="hero-bg" id="hero-bg">
+      <div class="hero-content">
+        <h1 class="hero-title" id="hero-title">지금 뜨는 콘텐츠</h1>
+        <p class="hero-desc" id="hero-desc">전 세계 시청자들이 열광하는 오리지널 시리즈를 지금 경험하세요.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="black"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            재생
+          </button>
+          <button class="btn btn-secondary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            상세 정보
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 콘텐츠 행 영역 -->
+    <div id="content-rows"></div>
+  </main>
+
+  <!-- 모바일 하단 네비게이션 -->
+  <nav class="mobile-nav">
+    <a href="#" class="nav-item active">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      홈
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+      라이브
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      검색
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+      카테고리
+    </a>
+  </nav>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
